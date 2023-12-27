@@ -37,6 +37,21 @@ namespace GestaoProdutos.Application.Services
                 throw new ArgumentException("Produto não encontrado");
             }
         }
+        public async Task DeleteProdutoAsync(int id)
+        {
+            var produto = await _produtoRepository.GetProdutoByCodProdutoAsync(id);
+
+            if (produto != null)
+            {
+                produto.Situacao = 0;
+
+                await _produtoRepository.DeleteProdutoAsync(produto);
+            }
+            else
+            {
+                throw new ArgumentException("Produto não encontrado");
+            }
+        }
 
     }
 }

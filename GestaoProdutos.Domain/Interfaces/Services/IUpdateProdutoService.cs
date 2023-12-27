@@ -10,6 +10,6 @@ namespace GestaoProdutos.Domain.Interfaces.Services
     public interface IUpdateProdutoService
     {
         Task UpdateProdutoAsync(int id, Produto produto);
-        //Task DeleteProdutoAsync(int id);
+        Task DeleteProdutoAsync(int id);
     }
 }

@@ -15,7 +15,6 @@ namespace GestaoProdutos.API
             services.ConfigureDbContext(configuration);
 
             //interfaces/services//
-            services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IAddProdutoService, AddProdutoService>();
             services.AddScoped<IGetProdutoService, GetProdutoService>();
             services.AddScoped<IUpdateProdutoService, UpdateProdutoService>();

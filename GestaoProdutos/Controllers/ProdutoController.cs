@@ -11,14 +11,12 @@ namespace GestaoProdutos.API.Controllers
     [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
-        private readonly IProdutoService _produtoService;
         private readonly IAddProdutoService _addProdutoService;
         private readonly IGetProdutoService _getProdutoService;
         private readonly IUpdateProdutoService _updateProdutoService;
 
-        public ProdutoController(IProdutoService produtoService, IAddProdutoService addProdutoService, IGetProdutoService getProdutoService, IUpdateProdutoService updateProdutoService)
+        public ProdutoController(IAddProdutoService addProdutoService, IGetProdutoService getProdutoService, IUpdateProdutoService updateProdutoService)
         {
-            _produtoService = produtoService ?? throw new ArgumentNullException(nameof(produtoService));
             _addProdutoService = addProdutoService ?? throw new ArgumentNullException(nameof(addProdutoService));
             _getProdutoService = getProdutoService ?? throw new ArgumentNullException(nameof(getProdutoService));
             _updateProdutoService = updateProdutoService ?? throw new ArgumentNullException(nameof(updateProdutoService));
@@ -82,14 +80,14 @@ namespace GestaoProdutos.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = await _produtoService.GetProdutoByCodProdutoAsync(id);
+            var produto = await _getProdutoService.GetProdutoByCodProdutoAsync(id);
 
             if (produto == null)
             {
                 return NotFound();
             }
 
-            await _produtoService.DeleteProdutoAsync(id);
+            await _updateProdutoService.DeleteProdutoAsync(id);
 
             return NoContent();
         }
